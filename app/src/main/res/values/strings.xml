@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Final</string>
+    <string name="new_user">New User Profile</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm">Confirm Password</string>
+    <string name="add">Add some plants</string>
+    <string name="add_desc">These can be plants that you already have or ones that you want!
+    Click the heart to add the plant to your list.</string>
+    <string name="create">Create Account</string>
+    <string name="discover">Discover</string>
+    <string name="user">User Profile</string>
+    <string name="my_plants">My Plants</string>
+    <string name="my_reviews">My Reviews</string>
+    <string name="planted">Planted</string>
+    <string name="login">Log in</string>
+    <string name="newButton">New User</string>
+    <string name="description">Description</string>
+
+</resources>
