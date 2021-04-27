@@ -112,30 +112,8 @@ public class NewUserActivity extends AppCompatActivity {
     }
 
     public void checkAccount(View view){
-        String api = api_root + "result/user/" + editText_email.getText();
-        client.get(api, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Log.d("userInfo", new String(responseBody));
-                if(responseBody.length == 2){
-                    create(view);
-                }
-                else{
-                    Toast.makeText(context, "Email linked to an existing account", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-            }
-        });
-    }
-
-    public void create(View view) {
-
         if(TextUtils.isEmpty(editText_email.getText()) || TextUtils.isEmpty(editText_password.getText())
-        || TextUtils.isEmpty(editText_name.getText()) || TextUtils.isEmpty(editText_confirm.getText())){
+                || TextUtils.isEmpty(editText_name.getText()) || TextUtils.isEmpty(editText_confirm.getText())){
             Toast.makeText(this, "Empty fields", Toast.LENGTH_SHORT).show();
         }
         else if(!editText_confirm.getText().toString().equals(editText_password.getText().toString())){
@@ -145,6 +123,28 @@ public class NewUserActivity extends AppCompatActivity {
             Toast.makeText(this, "Invalid email", Toast.LENGTH_SHORT).show();
         }
         else {
+            String api = api_root + "result/user/" + editText_email.getText();
+            client.get(api, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    Log.d("userInfo", new String(responseBody));
+                    if (responseBody.length == 2) {
+                        create(view);
+                    } else {
+                        Toast.makeText(context, "Email linked to an existing account", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                }
+            });
+        }
+    }
+
+    public void create(View view) {
+
             JSONObject body = new JSONObject();
             try {
                 ArrayList<String> myPlants = new ArrayList<>();
@@ -177,6 +177,5 @@ public class NewUserActivity extends AppCompatActivity {
             } catch (JSONException | UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-        }
     }
 }
