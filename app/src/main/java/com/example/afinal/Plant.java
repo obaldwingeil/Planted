@@ -2,13 +2,15 @@ package com.example.afinal;
 
 public class Plant {
 
+    private int _id;
     private String name;
     private String description;
-    private int rating;
+    private double rating;
     private String image_url;
     private boolean saved;
 
-    public Plant(String name, String description, int rating, String image_url, boolean saved){
+    public Plant(int _id, String name, String description, double rating, String image_url, boolean saved){
+        this._id = _id;
         this.name = name;
         this.description = description;
         this.rating = rating;
@@ -32,11 +34,11 @@ public class Plant {
         this.description = description;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 
@@ -54,5 +56,13 @@ public class Plant {
 
     public void setSaved(boolean saved) {
         this.saved = saved;
+    }
+
+    public int get_id() {
+        return _id;
+    }
+
+    public void set_id(int _id) {
+        this._id = _id;
     }
 }

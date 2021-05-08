@@ -41,10 +41,12 @@ public class NewUserActivity extends AppCompatActivity {
     private ArrayList<Plant> plantList;
     private RecyclerView recyclerView;
 
-    private String api_root = "http://192.168.1.70:5000/";
+    private String api_root;
     private static AsyncHttpClient client = new AsyncHttpClient();
 
     private Context context;
+
+    private PlantDAO plantDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,10 @@ public class NewUserActivity extends AppCompatActivity {
         editText_email = findViewById(R.id.editText_email);
         editText_password = findViewById(R.id.editText_password);
         editText_confirm = findViewById(R.id.editText_confirm);
+
+        api_root = getString(R.string.api_root);
+
+        plantDAO = new PlantDAO();
 
         recyclerView = findViewById(R.id.recyclerView_quickAdd);
         plantList = new ArrayList<>();
@@ -68,6 +74,15 @@ public class NewUserActivity extends AppCompatActivity {
     }
 
     public void getPlants(){
+        /*
+        plantList = plantDAO.getAllPlants();
+        Log.d("plantList", String.valueOf(plantList));
+        PlantAdapter adapter = new PlantAdapter(plantList);
+        recyclerView.setAdapter(adapter);
+        LinearLayoutManager layoutManager =  new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(layoutManager);*/
+
+        // recyclerView.addItemDecoration(dividerItemDecoration);
         String api = api_root + "/plants";
         client.get(api, new AsyncHttpResponseHandler() {
             @Override
@@ -77,27 +92,22 @@ public class NewUserActivity extends AppCompatActivity {
                     JSONArray response = new JSONArray(new String(responseBody));
                     for(int i = 0; i < 5; i++){
                         JSONObject plantObject = response.getJSONObject(i);
-                        JSONArray reviews = plantObject.getJSONArray("reviews");
-                        int total = 0;
-                        for(int j = 0; j < reviews.length(); j++){
-                            total += reviews.getJSONObject(j).getInt("rating");
-                        }
-                        int rating = total/reviews.length();
                         Plant plant = new Plant(
+                                plantObject.getInt("_id"),
                                 plantObject.getString("name"),
                                 plantObject.getString("description"),
-                                rating,
+                                plantObject.getDouble("rating"),
                                 plantObject.getJSONArray("images").getString(0),
                                 false
                         );
                         plantList.add(plant);
-                        PlantAdapter adapter = new PlantAdapter(plantList);
-                        recyclerView.setAdapter(adapter);
-                        LinearLayoutManager layoutManager =  new LinearLayoutManager(context);
-                        recyclerView.setLayoutManager(layoutManager);
-                        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation());
-                        // recyclerView.addItemDecoration(dividerItemDecoration);
                     }
+                    PlantAdapter adapter = new PlantAdapter(plantList);
+                    recyclerView.setAdapter(adapter);
+                    LinearLayoutManager layoutManager =  new LinearLayoutManager(context);
+                    recyclerView.setLayoutManager(layoutManager);
+                    DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation());
+                    // recyclerView.addItemDecoration(dividerItemDecoration);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -166,6 +176,8 @@ public class NewUserActivity extends AppCompatActivity {
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         Log.d("post", new String(responseBody));
                         Intent intent = new Intent(NewUserActivity.this, HomeActivity.class);
+                        intent.putExtra("_id", editText_email.getText().toString());
+                        intent.putExtra("name", editText_name.getText().toString());
                         startActivity(intent);
                     }
 

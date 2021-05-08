@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/alpha"
+        android:title="@string/alpha">
+    </item>
+    <item android:id="@+id/rating"
+        android:title="@string/rating">
+    </item>
+    <item android:id="@+id/diff"
+        android:title="@string/difficulty">
+    </item>
+
+</menu>

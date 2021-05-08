@@ -1,4 +1,7 @@
 <resources>
+
+    <string name="api_root">http://192.168.1.70:5000/</string>
+
     <string name="app_name">Final</string>
     <string name="new_user">New User Profile</string>
     <string name="name">Name</string>
@@ -17,5 +20,47 @@
     <string name="login">Log in</string>
     <string name="newButton">New User</string>
     <string name="description">Description</string>
+    <string name="images">My Photos</string>
+    
+    <string name="filter">Filter</string>
+    <string name="sort">Sort</string>
+    <string name="search">Search…</string>
+    <string name="easy">easy</string>
+    <string name="medium">medium</string>
+    <string name="hard">hard</string>
+    <string name="bright">bright light</string>
+    <string name="indirect">indirect bright light</string>
+    <string name="low">low light</string>
+    <string name="cold">55–65°F</string>
+    <string name="warm">65–75°F</string>
+    <string name="hot">75°F+</string>
+    <string name="filterOp">Filters: </string>
+    <string name="apply">Apply Filters</string>
+    
+    <string name="alpha">Alphabetical</string>
+    <string name="rating">Rating: High to Low</string>
+    <string name="difficulty">Difficulty: Easy to Hard</string>
+
+    <string name="level">Level</string>
+    <string name="buy">Buy This Plant</string>
+    <string name="colors">Colors: </string>
+    <string name="light">Light: </string>
+    <string name="temp">Temperature: </string>
+    <string name="tags">Tags: </string>
+    <string name="check">Check Light</string>
+
+    <string name="reviews">Reviews</string>
+    <string name="photos">Photos</string>
+    <string name="write">Write a Review</string>
+
+    <string name="receives">This spot receives</string>
+    <string name="perfect">That amount of light is perfect for this plant!</string>
+    <string name="add_plant">Add to My Plants</string>
+    <string name="instructions">Place your device in the spot where you plan to keep your plant. Try to do this at a time where the spot is getting the amount of light it gets for most of the day. </string>
+
+    <string name="rate">Rating:</string>
+    <string name="add_rev">Add description…</string>
+    <string name="post">Post Review</string>
+    <string name="take_picture">Take Picture</string>
 
 </resources>

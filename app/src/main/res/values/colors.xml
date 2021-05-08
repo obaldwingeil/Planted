@@ -11,4 +11,13 @@
     <color name="medium_green">#599300</color>
     <color name="light_green">#9FC51A</color>
     <color name="faded_medium_green">#26599300</color>
+    <color name="faded_dark_green">#261C4201</color>
+
+    <color name="purple">#6815AE</color>
+    <color name="pink">#E967CA</color>
+    <color name="blue">#1462F7</color>
+    <color name="green">#0F7A1D</color>
+    <color name="red">#E90F0F</color>
+    <color name="yellow">#F8D603</color>
+    <color name="orange">#F87E03</color>
 </resources>

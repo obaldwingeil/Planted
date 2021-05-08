@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.squareup.picasso.Picasso;
@@ -33,14 +33,23 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
     private Context context;
 
-    private String api_root = "http://192.168.1.70:5000/";
+    private String api_root;
     private static AsyncHttpClient client = new AsyncHttpClient();
+
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = this;
+
+        api_root = getString(R.string.api_root);
+
+        sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
 
         editText_email = findViewById(R.id.editText_loginEmail);
         editText_password = findViewById(R.id.editText_loginPassword);
@@ -75,10 +84,13 @@ public class MainActivity extends AppCompatActivity {
                             JSONArray result = new JSONArray(new String(responseBody));
                             JSONObject user = result.getJSONObject(0);
                             String password = user.getString("password");
+                            String _id = user.getString("_id");
+                            String name  = user.getString("name");
 
                             if (editText_password.getText().toString().equals(password)) {
                                 Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                                intent.putExtra("userInfo", new String(responseBody));
+                                intent.putExtra("_id", _id);
+                                intent.putExtra("name", name);
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(context, "Incorrect Password", Toast.LENGTH_LONG).show();
@@ -102,4 +114,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, NewUserActivity.class);
         startActivity(intent);
     }
+
 }
